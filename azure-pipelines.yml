@@ -9,8 +9,8 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
- variables:
-   imageName: 'pipelines-javascript-docker'
+variables:
+  imageName: 'pipelines-javascript-docker'
 
 steps:
 - task: Maven@3
