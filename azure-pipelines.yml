@@ -23,19 +23,22 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: Docker@2
-  displayName: Build an image
-  inputs:
-    repository: $(imageName)
-    command: build
-    Dockerfile: Dockerfile
 
 - task: CopyFiles@2
   inputs:
     Contents: 'target/*.war'
     TargetFolder: '$(build.artifactstagingdirectory)'
+    flattenFolders: true
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: 'helloworld'
     publishLocation: 'Container'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerhub-ivan'
+    repository: $(imageName)
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
