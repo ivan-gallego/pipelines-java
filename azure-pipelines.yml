@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageName: 'pipelines-javascript-docker'
+  imageName: 'pipelines-java'
 
 steps:
 - task: Maven@3
